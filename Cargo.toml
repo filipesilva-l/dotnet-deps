@@ -1,6 +1,6 @@
 [package]
 name = "dotnet-lens"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "dotnet-lens is a library for listing dependencies between .NET projects and packages."
 license = "MIT"
