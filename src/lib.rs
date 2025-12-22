@@ -44,7 +44,6 @@
 use std::{
     ffi::OsStr,
     fs::File,
-    os::unix::ffi::OsStrExt,
     path::{Path, PathBuf},
 };
 
@@ -195,10 +194,13 @@ impl ProjectLanguage {
     ///
     /// An `Option<ProjectLanguage>` containing the project language if it could be determined, otherwise `None`.
     pub fn from_extension(extension: &OsStr) -> Option<Self> {
-        match extension.as_bytes() {
-            b"csproj" => Some(Self::CSharp),
-            b"fsproj" => Some(Self::FSharp),
-            b"vbproj" => Some(Self::VB),
+        match extension.to_str() {
+            Some(val) => match val {
+                "csproj" => Some(Self::CSharp),
+                "fsproj" => Some(Self::FSharp),
+                "vbproj" => Some(Self::VB),
+                _ => None,
+            }
             _ => None,
         }
     }
